@@ -8,8 +8,7 @@ import {
   GitHubIcon, 
   CopyIcon, 
   CheckIcon, 
-  ExternalLinkIcon,
-  SparklesIcon 
+  ExternalLinkIcon
 } from './Icons';
 
 const Contact = () => {

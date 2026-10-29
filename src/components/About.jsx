@@ -6,7 +6,6 @@ import {
   ShieldCheckIcon, 
   SparklesIcon, 
   MapPinIcon, 
-  BriefcaseIcon,
   CheckCircleIcon,
   LinkedInIcon,
   GitHubIcon
@@ -41,6 +40,11 @@ const About = () => {
                 src={personalInfo.heroImage}
                 alt={personalInfo.name}
                 className="lead-avatar-img"
+                onError={(e) => {
+                  if (e.currentTarget.src !== personalInfo.fallbackImage) {
+                    e.currentTarget.src = personalInfo.fallbackImage;
+                  }
+                }}
               />
               <span className="lead-verified-indicator" title="Verified Engineer">
                 <CheckCircleIcon className="w-3.5 h-3.5 text-indigo" />

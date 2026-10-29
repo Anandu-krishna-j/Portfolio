@@ -7,6 +7,9 @@
  * To replace with your own details, edit the corresponding fields below.
  */
 
+import heroImage from '../assets/anandu-hero.jpg';
+import portraitCutout from '../assets/anandu-portrait.jpg';
+
 export const personalInfo = {
   // [CUSTOMIZE]: Your full name
   name: "AnanduKrishna J",
@@ -37,8 +40,8 @@ export const personalInfo = {
   resumeUrl: "/resume.pdf",
   
   // [CUSTOMIZE]: Profile Photos (Processed studio portrait with background removed)
-  heroImage: "/@fs/C:/Users/User/.gemini/antigravity/brain/134a6b8e-e78b-4dcf-9a0b-d31cf15e2fa7/anandu_hero_1793248132198.jpg",
-  portraitCutout: "/@fs/C:/Users/User/.gemini/antigravity/brain/134a6b8e-e78b-4dcf-9a0b-d31cf15e2fa7/anandu_portrait_1793248095591.jpg",
+  heroImage: heroImage,
+  portraitCutout: portraitCutout,
   fallbackImage: "/anandu-hero.jpg",
 
   // Professional Summary from resume.pdf

@@ -111,6 +111,11 @@ const Hero = () => {
                 alt={`${personalInfo.name} — Senior Frontend Engineer`}
                 className={`sculptural-portrait-img ${imgLoaded ? 'is-loaded' : ''}`}
                 onLoad={() => setImgLoaded(true)}
+                onError={(e) => {
+                  if (e.currentTarget.src !== personalInfo.fallbackImage) {
+                    e.currentTarget.src = personalInfo.fallbackImage;
+                  }
+                }}
                 loading="eager"
               />
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { MenuIcon, XIcon, ExternalLinkIcon, SparklesIcon } from './Icons';
+import { MenuIcon, XIcon, ExternalLinkIcon } from './Icons';
 
 const Navbar = ({ activeSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -64,6 +64,11 @@ const Navbar = ({ activeSection }) => {
               src={personalInfo.heroImage} 
               alt={personalInfo.name} 
               className="nav-avatar-img"
+              onError={(e) => {
+                if (e.currentTarget.src !== personalInfo.fallbackImage) {
+                  e.currentTarget.src = personalInfo.fallbackImage;
+                }
+              }}
             />
             <span className="nav-online-dot" title="Available for opportunities"></span>
           </div>

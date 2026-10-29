@@ -6,9 +6,7 @@ import {
   CodeIcon, 
   CalendarIcon, 
   CheckCircleIcon, 
-  ChevronRightIcon, 
-  SparklesIcon, 
-  ExternalLinkIcon 
+  ChevronRightIcon 
 } from './Icons';
 
 const Projects = () => {

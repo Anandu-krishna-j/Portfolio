@@ -18,6 +18,11 @@ const Footer = () => {
                 src={personalInfo.heroImage}
                 alt={personalInfo.name}
                 className="footer-avatar-thumb"
+                onError={(e) => {
+                  if (e.currentTarget.src !== personalInfo.fallbackImage) {
+                    e.currentTarget.src = personalInfo.fallbackImage;
+                  }
+                }}
               />
               <span className="footer-brand-name">{personalInfo.name}</span>
             </a>

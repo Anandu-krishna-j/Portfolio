@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { skillsData } from '../data/portfolioData';
-import { SparklesIcon, CodeIcon, CpuIcon, LayersIcon } from './Icons';
+import { SparklesIcon, CodeIcon, CpuIcon } from './Icons';
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('all');
