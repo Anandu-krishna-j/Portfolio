@@ -31,29 +31,62 @@ const Contact = () => {
     e.preventDefault();
     setFormStatus('submitting');
 
-    const endpoint = personalInfo.formEndpoint || `https://formsubmit.co/ajax/${personalInfo.email}`;
-
     try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          subject: formState.subject || `Inquiry from ${formState.name}`,
-          message: formState.message,
-          _subject: `New Portfolio Message: ${formState.subject || formState.name}`,
-          _captcha: 'false',
-          _template: 'table'
-        })
-      });
+      let response;
+      let data = {};
 
-      const data = await response.json();
+      if (personalInfo.web3formsAccessKey) {
+        // Send via Web3Forms (delivers straight to personalInfo.email with visitor reply-to)
+        response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: personalInfo.web3formsAccessKey,
+            name: formState.name,
+            email: formState.email,
+            subject: formState.subject || `Portfolio Note from ${formState.name}`,
+            message: formState.message,
+            from_name: formState.name,
+            replyto: formState.email
+          })
+        });
+        data = await response.json();
+      } else if (personalInfo.formEndpoint) {
+        // Send via configured Formspree / custom endpoint
+        response = await fetch(personalInfo.formEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: formState.name,
+            email: formState.email,
+            subject: formState.subject || `Inquiry from ${formState.name}`,
+            message: formState.message,
+            _replyto: formState.email,
+            replyto: formState.email,
+            _subject: `New Portfolio Message: ${formState.subject || formState.name}`,
+            _captcha: 'false',
+            _template: 'table'
+          })
+        });
+        data = await response.json().catch(() => ({}));
+      } else {
+        // Fallback: If neither key nor endpoint is set, prompt user and open mail client
+        const mailtoSubject = encodeURIComponent(formState.subject || `Inquiry from ${formState.name}`);
+        const mailtoBody = encodeURIComponent(
+          `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
+        );
+        window.location.href = `mailto:${personalInfo.email}?subject=${mailtoSubject}&body=${mailtoBody}`;
+        setFormStatus('fallback');
+        return;
+      }
 
-      if (response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
+      if (response && response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
         setFormStatus('success');
         setFormState({ name: '', email: '', subject: '', message: '' });
       } else {
@@ -291,7 +324,7 @@ const Contact = () => {
                 <div className="toast-content-box">
                   <strong>Message Delivered Successfully!</strong>
                   <p className="toast-subtext">
-                    Your note has been submitted directly to {personalInfo.email}. If this is your first submission, please check your inbox (or Spam folder) for a one-time "Activate Form" confirmation email from FormSubmit to approve deliveries.
+                    Your note has been delivered directly to {personalInfo.email}. Anandu will review it and reply back to your email address shortly.
                   </p>
                 </div>
               </div>
@@ -303,7 +336,7 @@ const Contact = () => {
                 <div className="toast-content-box">
                   <strong>Drafted in Email Client</strong>
                   <p className="toast-subtext">
-                    Direct server delivery was unavailable. Your note was pre-filled in your mail client addressed to {personalInfo.email} so you can hit send.
+                    Your note has been pre-filled in your default email client addressed to {personalInfo.email} so you can hit send.
                   </p>
                 </div>
               </div>

@@ -13,7 +13,7 @@ import portraitCutout from '../assets/anandu-portrait.jpg';
 export const personalInfo = {
   // [CUSTOMIZE]: Your full name
   name: "AnanduKrishna J",
-  
+
   // [CUSTOMIZE]: Professional titles / one-liner
   roles: [
     "Software Engineer",
@@ -21,24 +21,29 @@ export const personalInfo = {
     "Frontend Developer"
   ],
   heroTagline: "Software Engineer & Frontend Specialist crafting high-performance, scalable web applications with React.js.",
-  
+
   // [CUSTOMIZE]: Contact Information
   location: "Trivandrum, India",
   phone: "+91 81380 91435",
   email: "mailme.anandukrishna@gmail.com",
-  // [CUSTOMIZE]: Direct Message Form Delivery Endpoint
-  // Uses FormSubmit to deliver messages straight into mailme.anandukrishna@gmail.com without opening external mail client.
-  // On the first test submission, check your Gmail inbox (or spam) and click "Activate Form" once to approve.
-  // Can also use Formspree: "https://formspree.io/f/YOUR_ID" or Web3Forms.
-  formEndpoint: "https://formsubmit.co/ajax/mailme.anandukrishna@gmail.com",
+  // [CUSTOMIZE]: Direct Message Form Delivery Configuration
+  // OPTION 1 (Recommended - Free, High Reliability): Web3Forms
+  // 1. Visit https://web3forms.com
+  // 2. Enter your email (mailme.anandukrishna@gmail.com) to get your free access key instantly by email
+  // 3. Paste the access key below:
+  web3formsAccessKey: "b4b4ae55-61b0-4aee-bf10-0a8e0fbeb31c", // e.g. "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
+  // OPTION 2: Formspree or custom form endpoint
+  // Create a free form at https://formspree.io and paste your endpoint URL below:
+  formEndpoint: "", // e.g. "https://formspree.io/f/your_form_id"
   linkedin: "https://linkedin.com/in/anandukrishnaj",
   linkedinHandle: "linkedin.com/in/anandukrishnaj",
   github: "https://github.com/Anandu-krishna-j",
   githubHandle: "github.com/Anandu-krishna-j",
-  
+
   // [CUSTOMIZE]: Link to download resume file (defaults to resume.pdf in workspace root)
   resumeUrl: "/resume.pdf",
-  
+
   // [CUSTOMIZE]: Profile Photos (Processed studio portrait with background removed)
   heroImage: heroImage,
   portraitCutout: portraitCutout,
